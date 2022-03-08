@@ -30,23 +30,19 @@ public class LibraryAPIServiceImpl implements LibraryAPIService {
         System.out.printf("admin %s successfully unbanned client %s\n", admin.getPhone(), client.getPhone());
     }
 
-
     @Override
     public void takeBooks(Client client, List<Book> books) {
         if (client.getBanned()){
             System.out.printf("Client %s can't take books because he's banned\n", client.getPhone());
-        }
-        else{
-            clientService.takeBooks(client, books);
-            System.out.printf("Client %s took books %s\n", client.getPhone(), client.getBooks());
-
-        }
+            return;
+        } // так покороче и попонятнее
+        clientService.takeBooks(client, books);
+        System.out.printf("Client %s took books %s\n", client.getPhone(), client.getBooks());
     }
 
     @Override
     public void returnBooks(Client client, List<Book> books) {
         System.out.printf("Client %s returned books %s", client.getPhone(), client.getBooks());
         clientService.returnBooks(client, books);
-
     }
 }

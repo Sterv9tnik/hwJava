@@ -1,8 +1,8 @@
 package com.company;
 
 import Entities.User;
-import Services.UserService;
-import Services.impl.UserServiceImpl;
+import services.UserService;
+import services.impl.UserServiceImpl;
 import repository.UserRepository;
 import repository.impl.UserRepositoryImpl;
 
