@@ -1,8 +1,8 @@
-package Services.impl;
+package services.impl;
 
 import Entities.User;
 import Entities.UserStatus;
-import Services.UserService;
+import services.UserService;
 import repository.UserRepository;
 
 import java.util.ArrayList;
@@ -66,16 +66,13 @@ public class UserServiceImpl implements UserService {
         else if (userRepository.getBy(id).getStatus() == UserStatus.DELETED){
             System.out.printf("Can't update user with id %s , because it's status is DELETED\n", id);
         }
-        else{
+        else {
            return userRepository.save(new User(id,firstName,lastName,middleName,phone,email));
         }
-
         return null;
     }
 
     public User createUser(String firstName, String lastName, String middleName, String phone, String email){
         return userRepository.save(new User(UUID.randomUUID().toString(),firstName,lastName,middleName,phone,email));
     }
-
-
 }

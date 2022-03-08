@@ -7,43 +7,33 @@ import java.util.Map;
 public class Main {
     public static Double calc(String equation) {
         String [] arrString = equation.split(" ");
-        double number = 0;
-        switch (arrString[1]){
-            case "+":
-                number = Double.parseDouble(arrString[0]) + Double.parseDouble(arrString[2]);
-                break;
-            case "-":
-                number = Double.parseDouble(arrString[0]) - Double.parseDouble(arrString[2]);
-                break;
-            case "/":
-                number = Double.parseDouble(arrString[0]) / Double.parseDouble(arrString[2]);
-                break;
-            case "*":
-                number = Double.parseDouble(arrString[0]) * Double.parseDouble(arrString[2]);
-                break;
-        }
-    return number;
+        return switch (arrString[1]) {
+            case "+" -> Double.parseDouble(arrString[0]) + Double.parseDouble(arrString[2]);
+            case "-" -> Double.parseDouble(arrString[0]) - Double.parseDouble(arrString[2]);
+            case "/" -> Double.parseDouble(arrString[0]) / Double.parseDouble(arrString[2]);
+            case "*" -> Double.parseDouble(arrString[0]) * Double.parseDouble(arrString[2]);
+            default -> 0.0;
+        }; // тут с 17й джавы можно такие финты делать
     }
 
     public static String capitalizeEachWord(String str) {
-
         StringBuilder newString = new StringBuilder();
         for (String word: str.split(" ")){
-            newString.append(word.substring(0,1).toUpperCase() + word.substring(1).toLowerCase()+ " ");
+            newString.append(word.substring(0, 1).toUpperCase()).append(word.substring(1).toLowerCase()).append(" "); // тут вот так норм можно
         }
         return newString.toString().trim();
     }
 
     public static String getMiddleCharacter(String str) {
         int strLength = str.length();
-        if (strLength%2 == 1){
-            return str.substring(strLength/2,strLength/2+1);
+        if (strLength % 2 == 1){
+            return str.substring(strLength / 2, strLength / 2 + 1);
         }
-        else return str.substring(strLength/2-1,strLength/2+1);
+        else return str.substring(strLength / 2 - 1, strLength / 2 + 1);
     }
 
     public static String removeDuplicateWords(String str) {
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>(); // можно в ArrayList'е в <> не писать String, джава сама может с 8й (вродь) версии выводить
         for (String word: str.split(" ")){
             if (!list.contains(word)){
                 list.add(word);
@@ -53,7 +43,6 @@ public class Main {
     }
 
     public static Boolean hasSameOccurences(String str) {
-
         Map<Character, Integer> map = new HashMap<>();
         for (int i = 0; i < str.length(); i++){
             if (map.containsKey(str.charAt(i))){
@@ -61,13 +50,12 @@ public class Main {
             }
             else map.put(str.charAt(i), 1);
         }
-
-        for (int i : map.values()) {
-            if (i != (int) map.values().toArray()[0]) {
+        for (Integer i : map.values()) { // можно интеджером прост сделать и не кастить ничего
+            if (i != map.values().toArray()[0]) {
                 return false;
             }
         }
-            return true;
+        return true;
     }
 
     public static void main(String[] args) {

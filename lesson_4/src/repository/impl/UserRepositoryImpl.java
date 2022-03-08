@@ -29,32 +29,24 @@ public class UserRepositoryImpl implements UserRepository {
         return null;
     }
 
+    // тут можно вот так, чтобы без цикла явного
     @Override
     public User save(User user) {
-        for (User list_user: users){
-            if (list_user.getId().equals(user.getId()))
-            {
-                users.set(users.indexOf(list_user),user);
-                return user;
-            }
+        int indexOfUser = this.users.indexOf(user);
+        if (indexOfUser != -1) {
+            this.users.set(indexOfUser, user);
+            return user;
         }
-        users.add(user);
+        this.users.add(user);
         return user;
 
     }
 
     @Override
     public List<User> saveAll(List<User> users) {
-        for (User user: users){
-            for (User list_user: this.users){
-                if (user.getId().equals(list_user.getId())){
-                    this.users.set(users.indexOf(list_user),user);
-                }
-            }
-            if (this.users.contains(user) == false){
-                this.users.add(user);
-            }
+        for (User user: users) {
+            save(user);
         }
-        return users;
+        return this.users; // яб тут на пофиг в цикле просто сделал вызов save'a
     }
 }
