@@ -2,7 +2,7 @@ package connect.jpa;
 
 import connect.jpa.entity.Organization;
 import connect.jpa.entity.User;
-import connect.jpa.exception.RequiredFieldMissedException;
+import connect.jpa.entity.exception.RequiredFieldMissedException;
 import connect.jpa.service.OrganizationsService;
 import connect.jpa.service.UsersService;
 import org.junit.jupiter.api.Assertions;

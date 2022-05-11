@@ -1,7 +1,7 @@
 package connect.jpa.service.impl;
 
 import connect.jpa.entity.Organization;
-import connect.jpa.exception.RequiredFieldMissedException;
+import connect.jpa.entity.exception.RequiredFieldMissedException;
 import connect.jpa.repository.OrganizationsRepository;
 import connect.jpa.service.OrganizationsService;
 import org.springframework.beans.factory.annotation.Autowired;

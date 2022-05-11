@@ -1,4 +1,4 @@
-package connect.jpa.exception;
+package connect.jpa.entity.exception;
 
 public class RequiredFieldMissedException extends RuntimeException{
     public RequiredFieldMissedException(){

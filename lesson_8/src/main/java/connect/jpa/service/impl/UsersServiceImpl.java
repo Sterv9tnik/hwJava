@@ -2,7 +2,7 @@ package connect.jpa.service.impl;
 
 
 import connect.jpa.entity.User;
-import connect.jpa.exception.RequiredFieldMissedException;
+import connect.jpa.entity.exception.RequiredFieldMissedException;
 import connect.jpa.repository.UsersRepository;
 import connect.jpa.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
