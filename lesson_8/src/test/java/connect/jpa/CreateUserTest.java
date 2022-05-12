@@ -20,12 +20,26 @@ public class CreateUserTest {
             "Pupov",
             "8800553535"
     );
+    private static final User TEST_UPDATE_USER = new User(
+            "40220802-ebf5-4efb-b60c-2500a0fcb608",
+            "Andrey",
+            "Andreevich",
+            "Andreev",
+            "999                                                                                                                                           "
+    );
+
     @Autowired
     UsersService usersService;
 
     @Test
+    public void setTestUpdateUser(){
+    usersService.update(TEST_UPDATE_USER);
+    }
+
+    @Test
     public void createUser(){
         usersService.create(TEST_USER);
+        Assertions.assertEquals(TEST_USER, usersService.findById(TEST_USER.getId()));
     }
 
     @Test
