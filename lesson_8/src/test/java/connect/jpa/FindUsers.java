@@ -9,20 +9,20 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootTest
 @EnableJpaRepositories("connect.jpa.repository")
-public class FindUsers {
+class FindUsers { // это в класс UserTests
     @Autowired
     UsersService usersService;
 
     @Test
-    public void findByFirstName(){
-        for (User user :usersService.findByFirstName("Biba")){
+    void findByFirstName(){
+        for (User user: usersService.findByFirstName("Biba")){
             System.out.println(user);
         }
     }
 
     @Test
-    public void findByLastName(){
-        for (User user :usersService.findByLastName("Bubov")){
+    void findByLastName(){
+        for (User user: usersService.findByLastName("Bubov")){
             System.out.println(user);
         }
     }

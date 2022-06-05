@@ -55,7 +55,7 @@ public class BookingRepositoryImpl implements BookingRepository {
     }
 
     @Override
-    public void delete(String id) {
+    public void deleteBy(String id) {
         try (Connection connection = DBConnect.getDBConnection()){
             String query = "DELETE FROM bookings where id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -98,7 +98,7 @@ public class BookingRepositoryImpl implements BookingRepository {
     }
 
     @Override
-    public List<Booking> getBookings(LocalDate checkInFrom, LocalDate checkInTo, LocalDate checkOutFrom, LocalDate checkOutTo){
+    public List<Booking> getBookingsBy(LocalDate checkInFrom, LocalDate checkInTo, LocalDate checkOutFrom, LocalDate checkOutTo){
         List<Booking> bookings = new ArrayList<>();
         try (Connection connection = DBConnect.getDBConnection()) {
             PreparedStatement statement = null;

@@ -87,40 +87,40 @@ public class Main extends BeforeAndAfter{
     @Test
     @Tag("getUsers")
     public void getUsersOnFirstName() throws SQLException, UserNotFoundException {
-        List <User> user1 = Arrays.asList(userRepository.getUser(users.get(0).getId()), userRepository.getUser(users.get(2).getId()));
-        List <User> user2 = userRepository.getUsers("Biba", null, null);
+        List <User> user1 = Arrays.asList(userRepository.getBy(users.get(0).getId()), userRepository.getBy(users.get(2).getId()));
+        List <User> user2 = userRepository.getUsersBy("Biba", null, null);
         Assertions.assertTrue(user1.size()==user2.size() && user1.containsAll(user2) && user2.containsAll(user1));
     }
 
     @Test
     @Tag("getUsers")
     public void getUsersOnLastName() throws SQLException, UserNotFoundException {
-        List <User> user1 = Arrays.asList(userRepository.getUser(users.get(0).getId()), userRepository.getUser(users.get(1).getId()));
-        List <User> user2 = userRepository.getUsers(null, "Bibov", null);
+        List <User> user1 = Arrays.asList(userRepository.getBy(users.get(0).getId()), userRepository.getBy(users.get(1).getId()));
+        List <User> user2 = userRepository.getUsersBy(null, "Bibov", null);
         Assertions.assertTrue(user1.size()==user2.size() && user1.containsAll(user2) && user2.containsAll(user1));
     }
 
     @Test
     @Tag("getUsers")
     public void getUsersOnMiddleName() throws SQLException, UserNotFoundException {
-        List <User> user1 = Arrays.asList(userRepository.getUser(users.get(1).getId()), userRepository.getUser(users.get(2).getId()));
-        List <User> user2 = userRepository.getUsers(null, null, "Lupovich");
+        List <User> user1 = Arrays.asList(userRepository.getBy(users.get(1).getId()), userRepository.getBy(users.get(2).getId()));
+        List <User> user2 = userRepository.getUsersBy(null, null, "Lupovich");
         Assertions.assertTrue(user1.size()==user2.size() && user1.containsAll(user2) && user2.containsAll(user1));
     }
 
     @Test
     @Tag("getUsers")
     public void getUsersOnFirstNameAndMiddleName() throws SQLException, UserNotFoundException {
-        List <User> user1 = Arrays.asList(userRepository.getUser(users.get(2).getId()));
-        List <User> user2 = userRepository.getUsers("Biba", null, "Lupovich");
+        List <User> user1 = Arrays.asList(userRepository.getBy(users.get(2).getId()));
+        List <User> user2 = userRepository.getUsersBy("Biba", null, "Lupovich");
         Assertions.assertTrue(user1.size()==user2.size() && user1.containsAll(user2) && user2.containsAll(user1));
     }
 
     @Test
     @Tag("getUsers")
     public void getUsersOnAll() throws SQLException, UserNotFoundException {
-        List <User> user1 = Arrays.asList(userRepository.getUser(users.get(2).getId()));
-        List <User> user2 = userRepository.getUsers("Biba", "Lupov", "Lupovich");
+        List <User> user1 = Arrays.asList(userRepository.getBy(users.get(2).getId()));
+        List <User> user2 = userRepository.getUsersBy("Biba", "Lupov", "Lupovich");
         Assertions.assertTrue(user1.size()==user2.size() && user1.containsAll(user2) && user2.containsAll(user1));
     }
 
@@ -128,7 +128,7 @@ public class Main extends BeforeAndAfter{
     @Tag("getRooms")
     public void getRoomsOnRoomNumber() throws SQLException, RoomNotFoundException {
         List <Room> rooms1 = Arrays.asList(roomRepository.getBy(rooms.get(0).getId()), roomRepository.getBy(rooms.get(2).getId()));
-        List <Room> rooms2 = roomRepository.getRooms("1", null, null, null);
+        List <Room> rooms2 = roomRepository.getRoomsBy("1", null, null, null);
         Assertions.assertTrue(rooms1.size()==rooms2.size() && rooms1.containsAll(rooms2) && rooms2.containsAll(rooms1));
     }
 
@@ -136,7 +136,7 @@ public class Main extends BeforeAndAfter{
     @Tag("getRooms")
     public void getRoomsOnFloor() throws SQLException, RoomNotFoundException {
         List <Room> rooms1 = Arrays.asList(roomRepository.getBy(rooms.get(0).getId()), roomRepository.getBy(rooms.get(1).getId()));
-        List <Room> rooms2 = roomRepository.getRooms(null, 1, null, null);
+        List <Room> rooms2 = roomRepository.getRoomsBy(null, 1, null, null);
         Assertions.assertTrue(rooms1.size()==rooms2.size() && rooms1.containsAll(rooms2) && rooms2.containsAll(rooms1));
     }
 
@@ -144,7 +144,7 @@ public class Main extends BeforeAndAfter{
     @Tag("getRooms")
     public void getRoomsOnRoomType() throws SQLException, RoomNotFoundException {
         List <Room> rooms1 = Arrays.asList(roomRepository.getBy(rooms.get(1).getId()), roomRepository.getBy(rooms.get(2).getId()));
-        List <Room> rooms2 = roomRepository.getRooms(null, null, "Cheap", null);
+        List <Room> rooms2 = roomRepository.getRoomsBy(null, null, "Cheap", null);
         Assertions.assertTrue(rooms1.size()==rooms2.size() && rooms1.containsAll(rooms2) && rooms2.containsAll(rooms1));
     }
 
@@ -152,7 +152,7 @@ public class Main extends BeforeAndAfter{
     @Tag("getRooms")
     public void getRoomsOnPrice() throws SQLException, RoomNotFoundException {
         List <Room> rooms1 = Arrays.asList(roomRepository.getBy(rooms.get(1).getId()), roomRepository.getBy(rooms.get(2).getId()));
-        List <Room> rooms2 = roomRepository.getRooms(null, null, null, 100);
+        List <Room> rooms2 = roomRepository.getRoomsBy(null, null, null, 100);
         Assertions.assertTrue(rooms1.size()==rooms2.size() && rooms1.containsAll(rooms2) && rooms2.containsAll(rooms1));
     }
 
@@ -160,7 +160,7 @@ public class Main extends BeforeAndAfter{
     @Tag("getRooms")
     public void getRoomsOnRoomNumberAndRoomType() throws SQLException, RoomNotFoundException {
         List <Room> rooms1 = Arrays.asList(roomRepository.getBy(rooms.get(0).getId()));
-        List <Room> rooms2 = roomRepository.getRooms("1", null, "ULTRA", null);
+        List <Room> rooms2 = roomRepository.getRoomsBy("1", null, "ULTRA", null);
         Assertions.assertTrue(rooms1.size()==rooms2.size() && rooms1.containsAll(rooms2) && rooms2.containsAll(rooms1));
     }
 
@@ -168,14 +168,14 @@ public class Main extends BeforeAndAfter{
     @Tag("getRooms")
     public void getRoomsOnFloorAndRoomType() throws SQLException, RoomNotFoundException {
         List <Room> rooms1 = Arrays.asList(roomRepository.getBy(rooms.get(1).getId()));
-        List <Room> rooms2 = roomRepository.getRooms(null, 1, "Cheap", null);
+        List <Room> rooms2 = roomRepository.getRoomsBy(null, 1, "Cheap", null);
         Assertions.assertTrue(rooms1.size()==rooms2.size() && rooms1.containsAll(rooms2) && rooms2.containsAll(rooms1));
     }
     @Test
     @Tag("getRooms")
     public void getRoomsOnFloorAndRoomTypeAndPrice() throws SQLException, RoomNotFoundException {
         List <Room> rooms1 = Arrays.asList(roomRepository.getBy(rooms.get(1).getId()));
-        List <Room> rooms2 = roomRepository.getRooms(null, 1, "Cheap", 100);
+        List <Room> rooms2 = roomRepository.getRoomsBy(null, 1, "Cheap", 100);
         Assertions.assertTrue(rooms1.size()==rooms2.size() && rooms1.containsAll(rooms2) && rooms2.containsAll(rooms1));
     }
 
@@ -183,7 +183,7 @@ public class Main extends BeforeAndAfter{
     @Tag("getRooms")
     public void getRoomsOnAll() throws SQLException, RoomNotFoundException {
         List <Room> rooms1 = Arrays.asList(roomRepository.getBy(rooms.get(0).getId()));
-        List <Room> rooms2 = roomRepository.getRooms("1", 1, "ULTRA", 500);
+        List <Room> rooms2 = roomRepository.getRoomsBy("1", 1, "ULTRA", 500);
         Assertions.assertTrue(rooms1.size()==rooms2.size() && rooms1.containsAll(rooms2) && rooms2.containsAll(rooms1));
     }
 
@@ -191,7 +191,7 @@ public class Main extends BeforeAndAfter{
     @Tag("getBookings")
     public void getBookingsOnCheckIn() throws SQLException, BookingNotFoundException {
         List <Booking> bookings1 = Arrays.asList(bookingRepository.getBy(bookings.get(0).getId()),bookingRepository.getBy(bookings.get(2).getId()));
-        List <Booking> bookings2 = bookingRepository.getBookings(LocalDate.now(), LocalDate.now().plusDays(1), null, null);
+        List <Booking> bookings2 = bookingRepository.getBookingsBy(LocalDate.now(), LocalDate.now().plusDays(1), null, null);
         Assertions.assertTrue(bookings1.size()==bookings2.size() && bookings1.containsAll(bookings2) && bookings2.containsAll(bookings1));
     }
 
@@ -199,7 +199,7 @@ public class Main extends BeforeAndAfter{
     @Tag("getBookings")
     public void getBookingsOnCheckOut() throws SQLException, BookingNotFoundException {
         List <Booking> bookings1 = Arrays.asList(bookingRepository.getBy(bookings.get(1).getId()),bookingRepository.getBy(bookings.get(3).getId()));
-        List <Booking> bookings2 = bookingRepository.getBookings(null, null, LocalDate.now().plusDays(3), LocalDate.now().plusDays(5));
+        List <Booking> bookings2 = bookingRepository.getBookingsBy(null, null, LocalDate.now().plusDays(3), LocalDate.now().plusDays(5));
         Assertions.assertTrue(bookings1.size()==bookings2.size() && bookings1.containsAll(bookings2) && bookings2.containsAll(bookings1));
     }
 }

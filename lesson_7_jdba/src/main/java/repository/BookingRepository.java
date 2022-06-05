@@ -11,9 +11,9 @@ import java.util.List;
 public interface BookingRepository {
     Booking create(Booking booking) throws SQLException, FieldNotFilledException;
     Booking update(Booking booking) throws SQLException, BookingNotFoundException, FieldNotFilledException;
-    void delete(String id) throws SQLException;
+    void deleteBy(String id) throws SQLException;
     Booking getBy(String id) throws SQLException, BookingNotFoundException;
-    List<Booking> getBookings(LocalDate checkInFrom, LocalDate checkInTo,
-                              LocalDate checkOutFrom, LocalDate checkOutTo) throws SQLException;
+    List<Booking> getBookingsBy(LocalDate checkInFrom, LocalDate checkInTo,
+                                LocalDate checkOutFrom, LocalDate checkOutTo) throws SQLException;
     void deleteAll();
 }

@@ -8,11 +8,11 @@ import java.util.Collections;
 import java.util.List;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
-
 public class User {
     private String id;
     private String phone;
@@ -32,9 +32,7 @@ public class User {
         this.bookings = Collections.emptyList();
     }
 
-    public User(){
-    }
-
+    // метод создания пользователя из резалт сета должен быть в классе репозитория
     public User(ResultSet resultSet) throws SQLException {
         this.id = resultSet.getString("id_user");
         this.phone = resultSet.getString("phone");
