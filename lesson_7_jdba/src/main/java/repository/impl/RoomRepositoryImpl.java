@@ -61,7 +61,7 @@ public class RoomRepositoryImpl implements RoomRepository {
     }
 
     @Override
-    public void delete(String id) {
+    public void deleteBy(String id) {
         try (Connection connection = DBConnect.getDBConnection()){
             String query = "DELETE FROM rooms where id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -73,7 +73,7 @@ public class RoomRepositoryImpl implements RoomRepository {
     }
 
     @Override
-    public List<Room> getRooms(String roomNumber, Integer floor, String roomType, Integer price) {
+    public List<Room> getRoomsBy(String roomNumber, Integer floor, String roomType, Integer price) {
         List<Room> listRooms = new ArrayList<>();
         try (Connection connection = DBConnect.getDBConnection()){
             StringBuilder query = new StringBuilder("Select u.id as id_user, b.id as booking_id, r.id as id_room, * from rooms as r left join bookings as b on b.room_id  = r.id left join users as u on b.user_id  = u.id where ");

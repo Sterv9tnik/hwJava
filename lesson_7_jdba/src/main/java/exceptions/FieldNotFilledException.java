@@ -1,6 +1,6 @@
 package exceptions;
 
-public class FieldNotFilledException  extends Exception {
+public class FieldNotFilledException  extends RuntimeException {
     public FieldNotFilledException(String message) {
         super(message);
     }

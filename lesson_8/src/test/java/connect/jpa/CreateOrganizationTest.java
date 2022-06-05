@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @SpringBootTest
 @EnableJpaRepositories("connect.jpa.repository")
-public class CreateOrganizationTest {
+class CreateOrganizationTest { // это надо вынести в класс OrganizationTests
     private static final User TEST_USER = new User(
             UUID.randomUUID().toString(),
             "Biba",
@@ -52,13 +52,14 @@ public class CreateOrganizationTest {
     UsersService usersService;
 
     @Test
-    public void createOrganization(){
+    void createOrganization(){
         usersService.create(TEST_USER);
         organizationsService.create(TEST_ORGANIZATION);
+        // тут надо assertEquals какой-нибудь, что пользователь рил создался
     }
 
     @Test
-    public void NullInnCreate(){
+    void NullInnCreate(){
         Organization organization = TEST_ORGANIZATION;
         organization.setInn(null);
         Assertions.assertThrows(RequiredFieldMissedException.class, () -> organizationsService.create(organization));

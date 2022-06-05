@@ -8,11 +8,11 @@ import java.util.Collections;
 import java.util.List;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
-
 public class Room {
     private String id;
     private String roomNumber;
@@ -21,9 +21,6 @@ public class Room {
     private String description;
     private Integer price;
     private List<Booking> bookings;
-
-    public Room(){
-    }
 
     public Room(String id, String roomNumber, Integer floor, String roomType, String description, Integer price) {
         this.id = id;
@@ -35,6 +32,7 @@ public class Room {
         this.bookings = Collections.emptyList();
     }
 
+    // метод создания пользователя из резалт сета должен быть в классе репозитория
     public Room(ResultSet resultSet) throws SQLException {
 
         this.id = resultSet.getString("id_room");

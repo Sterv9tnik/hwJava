@@ -58,11 +58,11 @@ public class UpdatingTests {
                 "888",
                 "888");
         userRepository.update(updatedUser);
-        User getUser = userRepository.getUser(TEST_USER.getId());
+        User getUser = userRepository.getBy(TEST_USER.getId());
         getUser.setBookings(Collections.emptyList());
         Assertions.assertEquals(updatedUser, getUser);
 
-        userRepository.delete(TEST_USER.getId());
+        userRepository.deleteBy(TEST_USER.getId());
     }
 
     @Test
@@ -105,7 +105,7 @@ public class UpdatingTests {
         getRoom.setBookings(Collections.emptyList());
         Assertions.assertEquals(updatedRoom, getRoom);
 
-        roomRepository.delete(TEST_ROOM.getId());
+        roomRepository.deleteBy(TEST_ROOM.getId());
     }
 
     @Test
@@ -148,9 +148,9 @@ public class UpdatingTests {
         Booking getBooking = bookingRepository.getBy(TEST_BOOKING.getId());
         Assertions.assertEquals(updatedBooking, getBooking);
 
-        roomRepository.delete(TEST_ROOM.getId());
-        userRepository.delete(TEST_USER.getId());
-        bookingRepository.delete(TEST_BOOKING.getId());
+        roomRepository.deleteBy(TEST_ROOM.getId());
+        userRepository.deleteBy(TEST_USER.getId());
+        bookingRepository.deleteBy(TEST_BOOKING.getId());
     }
 
     @Test

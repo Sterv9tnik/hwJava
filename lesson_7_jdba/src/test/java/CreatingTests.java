@@ -47,9 +47,9 @@ public class CreatingTests {
     @Test
     public void createUser() throws SQLException, UserNotFoundException, FieldNotFilledException {
         userRepository.create(TEST_USER);
-        User getUser = userRepository.getUser(TEST_USER.getId());
+        User getUser = userRepository.getBy(TEST_USER.getId());
         Assertions.assertEquals(getUser, TEST_USER);
-        userRepository.delete(TEST_USER.getId());
+        userRepository.deleteBy(TEST_USER.getId());
     }
 
     @Test
@@ -70,7 +70,7 @@ public class CreatingTests {
         Room getRoom = roomRepository.getBy(TEST_ROOM.getId());
         Assertions.assertEquals(getRoom, TEST_ROOM);
 
-        roomRepository.delete(TEST_ROOM.getId());
+        roomRepository.deleteBy(TEST_ROOM.getId());
     }
 
     @Test
@@ -82,9 +82,9 @@ public class CreatingTests {
         Booking getBooking = bookingRepository.getBy(TEST_BOOKING.getId());
         Assertions.assertEquals(TEST_BOOKING, getBooking);
 
-        roomRepository.delete(TEST_ROOM.getId());
-        userRepository.delete(TEST_USER.getId());
-        bookingRepository.delete(TEST_BOOKING.getId());
+        roomRepository.deleteBy(TEST_ROOM.getId());
+        userRepository.deleteBy(TEST_USER.getId());
+        bookingRepository.deleteBy(TEST_BOOKING.getId());
     }
 
     @Test
@@ -103,21 +103,21 @@ public class CreatingTests {
     @Test
     public void deleteUser() throws SQLException, FieldNotFilledException {
         userRepository.create(TEST_USER);
-        userRepository.delete(TEST_USER.getId());
-        Assertions.assertThrows(UserNotFoundException.class, () -> userRepository.getUser(TEST_USER.getId()));
+        userRepository.deleteBy(TEST_USER.getId());
+        Assertions.assertThrows(UserNotFoundException.class, () -> userRepository.getBy(TEST_USER.getId()));
 
     }
     @Test
     public void deleteRoom() throws SQLException, FieldNotFilledException {
         roomRepository.create(TEST_ROOM);
-        roomRepository.delete(TEST_ROOM.getId());
+        roomRepository.deleteBy(TEST_ROOM.getId());
         Assertions.assertThrows(RoomNotFoundException.class, () -> roomRepository.getBy(TEST_ROOM.getId()));
 
     }
     @Test
     public void deleteBooking() throws SQLException, FieldNotFilledException {
         bookingRepository.create(TEST_BOOKING);
-        bookingRepository.delete(TEST_BOOKING.getId());
+        bookingRepository.deleteBy(TEST_BOOKING.getId());
         Assertions.assertThrows(BookingNotFoundException.class, () -> bookingRepository.getBy(TEST_BOOKING.getId()));
     }
 }

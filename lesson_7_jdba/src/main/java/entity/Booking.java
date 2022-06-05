@@ -7,20 +7,19 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
-
 public class Booking {
     private String id;
     private LocalDate checkIn;
     private LocalDate checkOut;
     private User user;
     private Room room;
-    public Booking(){
-    }
 
+    // метод создания пользователя из резалт сета должен быть в классе репозитория
     public Booking(ResultSet resultSet) throws SQLException {
 
         this.id = resultSet.getString("booking_id");

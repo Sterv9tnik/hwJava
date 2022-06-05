@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import java.util.UUID;
 @SpringBootTest
 @EnableJpaRepositories("connect.jpa.repository")
-public class CreateUserTest {
+class CreateUserTest { // это в класс UserTests
     private static final User TEST_USER = new User(
             UUID.randomUUID().toString(),
             "Biba",
@@ -32,18 +32,19 @@ public class CreateUserTest {
     UsersService usersService;
 
     @Test
-    public void setTestUpdateUser(){
+    void shouldUpdateUser(){
     usersService.update(TEST_UPDATE_USER);
+    Assertions.assertEquals(TEST_USER, usersService.findById(TEST_USER.getId())); // тут и везде в принципе примерно такие проверки надо ставить
     }
 
     @Test
-    public void createUser(){
+    void shouldCreateUser(){
         usersService.create(TEST_USER);
         Assertions.assertEquals(TEST_USER, usersService.findById(TEST_USER.getId()));
     }
 
     @Test
-    public void NullPhoneCreate(){
+    void ShouldNotCreateUserWithoutPhone(){
         User user = TEST_USER;
         user.setPhone(null);
         Assertions.assertThrows(RequiredFieldMissedException.class, () -> usersService.create(user));

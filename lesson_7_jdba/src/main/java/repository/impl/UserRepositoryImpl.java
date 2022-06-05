@@ -15,30 +15,35 @@ import java.util.*;
 
 public class UserRepositoryImpl implements UserRepository {
     @Override
-    public User create(User user) throws FieldNotFilledException {
+    public User create(User user) {
         try (Connection connection = DBConnect.getDBConnection()){
             validation(user);
             String query = "INSERT INTO users values(?,?,?,?,?,?)";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, user.getId());
-            statement.setString(2, user.getPhone());
-            statement.setString(3, user.getEmail());
-            statement.setString(4, user.getFirstName());
-            statement.setString(5, user.getLastName());
-            statement.setString(6, user.getMiddleName());
-            statement.execute();
+            PreparedStatement createUserStatement = connection.prepareStatement(query);
+            buildCreateUserStatement(createUserStatement, user); // лучше разбивать большие функции на мелкие. далее аналогично везде
+            createUserStatement.execute();
             return user;
         } catch (SQLException e) {
         e.printStackTrace();
-        }
         return null;
+        }
     }
 
+    private void buildCreateUserStatement(PreparedStatement createUserStatement, User user) throws SQLException {
+        createUserStatement.setString(1, user.getId());
+        createUserStatement.setString(2, user.getPhone());
+        createUserStatement.setString(3, user.getEmail());
+        createUserStatement.setString(4, user.getFirstName());
+        createUserStatement.setString(5, user.getLastName());
+        createUserStatement.setString(6, user.getMiddleName());
+    }
+
+
     @Override
-    public User update(User user) throws FieldNotFilledException, UserNotFoundException {
+    public User update(User user) {
         try (Connection connection = DBConnect.getDBConnection()){
             validation(user);
-            getUser(user.getId());
+            getBy(user.getId());
             String query = "UPDATE users SET phone = ?, email = ?, first_name = ?, last_name = ?, middle_name = ? WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, user.getPhone());
@@ -55,7 +60,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void delete(String id) {
+    public void deleteBy(String id) {
         try (Connection connection = DBConnect.getDBConnection()){
             String query = "DELETE FROM users where id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -67,7 +72,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User getUser(String id) throws UserNotFoundException {
+    public User getBy(String id) {
         try (Connection connection = DBConnect.getDBConnection()){
             User user = new User();
             String query = "Select u.id as id_user, b.id as booking_id, r.id as id_room, * from users as u" +
@@ -97,12 +102,12 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> getUsers(String firstName, String lastName, String middleName) {
+    public List<User> getUsersBy(String firstName, String lastName, String middleName) {
         try (Connection connection = DBConnect.getDBConnection()){
             List <User> users = new ArrayList<>();
             //Query
             StringBuilder query = new StringBuilder("Select u.id as id_user, b.id as booking_id, r.id as id_room, * from users as u left join bookings as b on b.user_id  = u.id left join rooms as r on b.room_id  = r.id where ");
-            Map<Integer, String> names = new HashMap<>();
+            Map<Integer, String> names = new HashMap<>(); // это все надо в отдельный метод (сборку query)
             if (firstName != null){
                 query.append("first_name = ?");
                 names.put(1,firstName);
@@ -135,7 +140,7 @@ public class UserRepositoryImpl implements UserRepository {
             statement.execute();
             Map <User, ArrayList<Booking>> userBookings = new HashMap<>();
             ResultSet resultSet = statement.getResultSet();
-            while (resultSet.next()) {
+            while (resultSet.next()) { // вот тут надо поразбираться и повыносить в методы -- такое ветвление чет жоское
                 User user = new User(resultSet);
                 Room room = new Room(resultSet);
                 Booking booking = new Booking(resultSet);
